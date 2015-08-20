@@ -1,6 +1,8 @@
 # Dashboard
 Panteon Web UI
 
+![](https://github.com/PanteonProject/panteon-dashboard/blob/master/misc/path4141.png)  
+
 ## Usage
 ### Requirements
 * [NodeJS](http://nodejs.org/) (with [NPM](https://www.npmjs.org/))
