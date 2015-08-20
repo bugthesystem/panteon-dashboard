@@ -3,7 +3,11 @@ Panteon Web UI
 
 ![](https://github.com/PanteonProject/panteon-dashboard/blob/master/misc/path4141.png)  
 
-## Usage
+## Preview  
+![](https://raw.githubusercontent.com/PanteonProject/panteon-dashboard/master/misc/dash-ui.png)  
+
+## Development
+
 ### Requirements
 * [NodeJS](http://nodejs.org/) (with [NPM](https://www.npmjs.org/))
 * [Bower](http://bower.io)
