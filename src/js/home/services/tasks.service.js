@@ -10,7 +10,8 @@ function tasksService($http, $q, logger) {
 
     var service = {
         getAll: getAll,
-        getTaskByName: getTaskByName
+        getTaskByName: getTaskByName,
+        stopTaskByName: stopTaskByName
     };
 
     return service;
@@ -23,7 +24,7 @@ function tasksService($http, $q, logger) {
                 deferred.resolve(data);
             })
             .error(function (data, status) {
-                logger.error('XHR Failed for MessagesService::getAll.' + data);
+                logger.error('XHR Failed for tasksService::getAll.' + data);
                 deferred.reject(data);
             });
 
@@ -38,7 +39,22 @@ function tasksService($http, $q, logger) {
                 deferred.resolve(data);
             })
             .error(function (data, status) {
-                logger.error('XHR Failed for MessagesService::getMessageById.' + data);
+                logger.error('XHR Failed for tasksService::getTaskByName.' + data);
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    }
+
+    function stopTaskByName(name) {
+        var deferred = $q.defer();
+
+        $http.get('http://localhost:5002/tasks/stop/' + encodeURIComponent(name))
+            .success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            })
+            .error(function (data, status) {
+                logger.error('XHR Failed for tasksService::stopTaskByName.' + data);
                 deferred.reject(data);
             });
 

@@ -71,10 +71,11 @@
                             <td>{{taskItem.PrevEvent}}</td>
                             <td>{{taskItem.NextEvent}}</td>
                             <td>
-                                <span ng-class="taskItem.IsScheduleRunning ? 'text-success': 'text-error'">
-                                    <i ng-class="taskItem.IsScheduleRunning ? 'fa fa-check': 'fa fa-remove'"></i></span>
+                                <span ng-class="taskItem.IsScheduleRunning ? 'text-success': 'text-danger'">
+                                    <i style="font-size: 23px !important;" ng-class="taskItem.IsScheduleRunning ? 'fa fa-clock-o fa-3': 'fa fa-stop fa-3'"></i>
+                                </span>
                             </td>
-                            <td>
+                            <td width="30%">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-striped active" role="progressbar"
                                          aria-valuenow="{{taskItem.Progress}}" aria-valuemin="0" aria-valuemax="100"
@@ -84,28 +85,27 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td width="20%">
 
-                                <!-- Split button -->
-                                <div class="btn-group">
-
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                        <span class="glyphicon glyphicon-cog"
-                                              aria-hidden="true"></span>
-                                        <span class="caret"></span></button>
-
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Start</a></li>
-                                        <li><a href="#">Pause</a></li>
-                                        <li><a href="#">Edit</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Run Immediately</a></li>
-                                    </ul>
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-sm btn-default"><span
+                                            class="glyphicon glyphicon-play"
+                                            aria-hidden="true"></span> Start
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-default"><span
+                                            class="glyphicon glyphicon-pause" aria-hidden="true"></span> Pause
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-default"><span
+                                            class="glyphicon glyphicon-edit"
+                                            aria-hidden="true"></span> Edit
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-default"
+                                            ng-click="vm.stopTask(taskItem)"><span
+                                            class="glyphicon glyphicon-stop"></span> Stop
+                                    </button>
                                 </div>
 
                             </td>
-
                         </tr>
                         </tbody>
                     </table>

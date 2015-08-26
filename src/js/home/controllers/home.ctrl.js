@@ -14,14 +14,14 @@ function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster) {
 
     vm.tasks = [];
 
-
     vm.loadTasks = loadTasks;
+    vm.stopTask = stopTask;
 
     init();
 
     function init() {
 
-        initRealtime();
+        watchTasks();
 
         logger.info('START tasks View');
 
@@ -36,6 +36,14 @@ function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster) {
             vm.tasks = response;
 
             return vm.tasks;
+        });
+    }
+
+    function stopTask(task) {
+        console.log("stopTask called");
+        return tasksService.stopTaskByName(task.Name).then(function (result) {
+            task.IsScheduleRunning = false;
+            console.log(result);
         });
     }
 
@@ -58,7 +66,7 @@ function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster) {
         }
     }
 
-    function initRealtime() {
+    function watchTasks() {
         var client = new Pusher('629772c3ccd3b206462f');
         var pusher = $pusher(client);
         var my_channel = pusher.subscribe('panteon');
