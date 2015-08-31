@@ -95,10 +95,12 @@
                                             ng-click="vm.startTask(taskItem)" ng-disabled="taskItem.IsScheduleRunning">
                                         <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-default">
+                                    <button type="button" class="btn btn-sm btn-default"
+                                            ng-disabled="!taskItem.IsScheduleRunning">
                                         <span class="glyphicon glyphicon-pause" aria-hidden="true"></span> Pause
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-default">
+                                    <button type="button" class="btn btn-sm btn-default"
+                                            ng-disabled="!taskItem.IsScheduleRunning">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
                                     </button>
                                     <button type="button" class="btn btn-sm btn-default"
