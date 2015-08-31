@@ -67,12 +67,14 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="taskItem in vm.tasks">
-                            <td>{{taskItem.Name}}</td>
+                            <td>{{taskItem.Name}} <img ng-if="taskItem.IsRunning" src="img/loader.gif"
+                                                       style="width: 23px;"/></td>
                             <td>{{taskItem.PrevEvent}}</td>
                             <td>{{taskItem.NextEvent}}</td>
                             <td>
                                 <span ng-class="taskItem.IsScheduleRunning ? 'text-success': 'text-danger'">
-                                    <i style="font-size: 23px !important;" ng-class="taskItem.IsScheduleRunning ? 'fa fa-clock-o fa-3': 'fa fa-stop fa-3'"></i>
+                                    <i style="font-size: 23px !important;"
+                                       ng-class="taskItem.IsScheduleRunning ? 'fa fa-clock-o fa-3': 'fa fa-stop fa-3'"></i>
                                 </span>
                             </td>
                             <td width="30%">
@@ -88,20 +90,19 @@
                             <td width="20%">
 
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-sm btn-default"><span
-                                            class="glyphicon glyphicon-play"
-                                            aria-hidden="true"></span> Start
+                                    <button type="button" class="btn btn-sm btn-default"
+                                            ng-click="vm.startTask(taskItem)" ng-disabled="taskItem.IsScheduleRunning">
+                                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-default"><span
-                                            class="glyphicon glyphicon-pause" aria-hidden="true"></span> Pause
+                                    <button type="button" class="btn btn-sm btn-default">
+                                        <span class="glyphicon glyphicon-pause" aria-hidden="true"></span> Pause
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-default"><span
-                                            class="glyphicon glyphicon-edit"
-                                            aria-hidden="true"></span> Edit
+                                    <button type="button" class="btn btn-sm btn-default">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
                                     </button>
                                     <button type="button" class="btn btn-sm btn-default"
-                                            ng-click="vm.stopTask(taskItem)"><span
-                                            class="glyphicon glyphicon-stop"></span> Stop
+                                            ng-click="vm.stopTask(taskItem)" ng-disabled="!taskItem.IsScheduleRunning">
+                                        <span class="glyphicon glyphicon-stop"></span> Stop
                                     </button>
                                 </div>
 

@@ -11,7 +11,8 @@ function tasksService($http, $q, logger) {
     var service = {
         getAll: getAll,
         getTaskByName: getTaskByName,
-        stopTaskByName: stopTaskByName
+        stopTaskByName: stopTaskByName,
+        startTaskByName: startTaskByName
     };
 
     return service;
@@ -55,6 +56,21 @@ function tasksService($http, $q, logger) {
             })
             .error(function (data, status) {
                 logger.error('XHR Failed for tasksService::stopTaskByName.' + data);
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    }
+
+    function startTaskByName(name) {
+        var deferred = $q.defer();
+
+        $http.get('http://localhost:5002/tasks/start/' + encodeURIComponent(name))
+            .success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            })
+            .error(function (data, status) {
+                logger.error('XHR Failed for tasksService::startTaskByName.' + data);
                 deferred.reject(data);
             });
 
