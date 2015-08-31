@@ -3,7 +3,6 @@
 angular
     .module('PanteonApp.home')
     .factory('tasksService', ['$http', '$q', tasksService])
-
 ;
 
 function tasksService($http, $q, logger) {

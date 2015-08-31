@@ -67,8 +67,9 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="taskItem in vm.tasks">
-                            <td>{{taskItem.Name}} <img ng-if="taskItem.IsRunning" src="img/loader.gif"
-                                                       style="width: 23px;"/></td>
+                            <td><img ng-if="taskItem.IsRunning" src="img/loader.gif"
+                                     style="width: 14px;"/> {{taskItem.Name}}
+                            </td>
                             <td>{{taskItem.PrevEvent}}</td>
                             <td>{{taskItem.NextEvent}}</td>
                             <td>
