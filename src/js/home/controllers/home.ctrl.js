@@ -13,6 +13,7 @@ function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster) {
     var vm = this;
 
     vm.tasks = [];
+    vm.searchTerm = "";
 
     vm.loadTasks = loadTasks;
     vm.stopTask = stopTask;
@@ -138,11 +139,15 @@ function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster) {
         var client = new Pusher('629772c3ccd3b206462f');
         var pusher = $pusher(client);
         var my_channel = pusher.subscribe('panteon');
+        /*TODO: rename task to worker*/
         pusher.bind('task:onprogress', taskProgress);
-        pusher.bind('task:started', taskStarted);
+        pusher.bind('task:onstarted', taskStarted);
         pusher.bind('task:onstopped', taskStopped);
         pusher.bind('task:onpaused', taskPaused);
+
         pusher.bind('task:onenter', taskActionEnter);
         pusher.bind('task:onexit', taskActionExit);
+
+        //pusher.bind('task:onexception', taskException);
     }
 }
