@@ -2,11 +2,11 @@
 
 angular
     .module('PanteonApp.home')
-    .factory('tasksService', ['$http', '$q', tasksService])
+    .factory('tasksService', ['$http', '$q', 'logger', 'Constants', tasksService])
 
 ;
 
-function tasksService($http, $q, logger) {
+function tasksService($http, $q, logger, Constants) {
 
     var service = {
         getAll: getAll,
@@ -19,7 +19,7 @@ function tasksService($http, $q, logger) {
     function getAll() {
         var deferred = $q.defer();
 
-        $http.get('http://localhost:5002/tasks')
+        $http.get(Constants.API_URL)
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
             })
@@ -34,7 +34,7 @@ function tasksService($http, $q, logger) {
     function getTaskByName(name) {
         var deferred = $q.defer();
 
-        $http.get('http://localhost:5002/tasks/' + name)
+        $http.get(Constants.API_URL + name)
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
             })
@@ -49,7 +49,7 @@ function tasksService($http, $q, logger) {
     function stopTaskByName(name) {
         var deferred = $q.defer();
 
-        $http.get('http://localhost:5002/tasks/stop/' + encodeURIComponent(name))
+        $http.get(Constants.API_URL + 'stop/' + encodeURIComponent(name))
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
             })
