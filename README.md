@@ -28,5 +28,5 @@ Continue developing the dashboard further by editing the `src` directory. With t
 #### Modules & Packages
 By default, Panteon Dashboard includes [`ui.bootstrap`](http://angular-ui.github.io/bootstrap/), [`ui.router`](https://github.com/angular-ui/ui-router) and [`ngCookies`](https://docs.angularjs.org/api/ngCookies). 
 
-## Thanks
-* [RDash-Angular](https://github.com/rdash/rdash-angular)
+## Credits
+* [Rdash-Angular](https://github.com/rdash/rdash-angular)
