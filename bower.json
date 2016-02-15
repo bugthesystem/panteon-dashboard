@@ -28,7 +28,8 @@
     "pusher": "~2.2.4",
     "lodash": "~3.10.1",
     "angularjs-toaster": "~0.4.15",
-    "angular-animate": "~1.4.4"
+    "angular-animate": "~1.4.4",
+    "angular-smart-table": "~2.1.7"
   },
   "repository": {
     "type": "git",

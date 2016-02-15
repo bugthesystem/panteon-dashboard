@@ -4,11 +4,10 @@
 
 angular.module('PanteonApp.home')
     .controller('HomeCtrl',
-    ['$scope', 'tasksService', 'logger', '$pusher', '$timeout', 'toaster',
-        HomeCtrl]
-);
+        ['$scope', 'tasksService', 'logger', '$pusher', '$timeout', 'toaster', '$modal', HomeCtrl]
+    );
 
-function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster) {
+function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster, $modal) {
     /* jshint validthis: true */
     var vm = this;
 
@@ -18,6 +17,7 @@ function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster) {
     vm.loadTasks = loadTasks;
     vm.stopTask = stopTask;
     vm.startTask = startTask;
+    vm.taskHistory = taskHistory;
 
     init();
 
@@ -46,6 +46,25 @@ function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster) {
         return tasksService.stopTaskByName(task.Name).then(function (result) {
             task.IsScheduleRunning = false;
             console.log(result);
+        });
+    }
+
+    function taskHistory(task) {
+        console.log("startTask called");
+        return tasksService.getHistoryByTaskName(task.Name).then(function (result) {
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'templates/historyModal.html',
+                controller: 'HistoryModalCtrl',
+                controllerAs: 'vm',
+                size: 'lg',
+                resolve: {
+                    viewModel: function () {
+                        return {name: task.Name, history: result};
+                    }
+                }
+            });
         });
     }
 

@@ -12,7 +12,8 @@ function tasksService($http, $q, logger, Constants) {
         getAll: getAll,
         getTaskByName: getTaskByName,
         stopTaskByName: stopTaskByName,
-        startTaskByName: startTaskByName
+        startTaskByName: startTaskByName,
+        getHistoryByTaskName: getHistoryByTaskName
     };
 
     return service;
@@ -26,6 +27,21 @@ function tasksService($http, $q, logger, Constants) {
             })
             .error(function (data, status) {
                 logger.error('XHR Failed for tasksService::getAll.' + data);
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    }
+
+    function getHistoryByTaskName(name) {
+        var deferred = $q.defer();
+
+        $http.get(Constants.API_URL + 'history/' + name)
+            .success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            })
+            .error(function (data, status) {
+                logger.error('XHR Failed for tasksService::getHistoryByTaskName.' + data);
                 deferred.reject(data);
             });
 

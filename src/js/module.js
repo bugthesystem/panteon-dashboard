@@ -5,5 +5,6 @@ angular.module('PanteonApp', [
     'PanteonApp.common',
     'PanteonApp.home',
     'toaster',
-    'ngAnimate'
+    'ngAnimate',
+    'smart-table'
 ]);

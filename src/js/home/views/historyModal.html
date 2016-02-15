@@ -1,0 +1,36 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{vm.model.name}}</h3>
+    </div>
+    <div class="modal-body">
+        <table st-table="vm.model.history" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Details</th>
+                <th>Date Created</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in vm.model.history">
+                <td>{{row.Id}}</td>
+                <td>{{row.Name}}</td>
+                <td>{{row.Details}}</td>
+                <td>{{row.DateCreated}}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="text-center">
+                    <div st-pagination="" st-items-by-page="vm.model.itemsByPage"
+                         st-displayed-pages="vm.model.displayedPages"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="vm.close()">Close</button>
+    </div>
+</div>

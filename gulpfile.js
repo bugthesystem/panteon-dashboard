@@ -31,7 +31,8 @@ var paths = {
     styles: 'src/less/**/*.*',
     images: 'src/img/**/*.*',
     templates: [
-        'src/js/home/views/index.html'
+        'src/js/home/views/index.html',
+        'src/js/home/views/historyModal.html'
     ],
     index: 'src/index.html',
     bower_fonts: 'src/components/**/*.{ttf,woff,eof,svg}',
