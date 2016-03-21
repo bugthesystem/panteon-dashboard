@@ -81,7 +81,7 @@ function tasksService($http, $q, logger, Constants) {
     function startTaskByName(name) {
         var deferred = $q.defer();
 
-        $http.get('http://localhost:5002/tasks/start/' + encodeURIComponent(name))
+        $http.get( Constants.API_URL + 'start/' + encodeURIComponent(name))
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
             })
