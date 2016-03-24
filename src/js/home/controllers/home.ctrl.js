@@ -4,13 +4,14 @@
 
 angular.module('PanteonApp.home')
     .controller('HomeCtrl',
-        ['$scope', 'tasksService', 'logger', '$pusher', '$timeout', 'toaster', '$modal', HomeCtrl]
+        ['$scope', 'tasksService', 'logger', '$pusher', '$timeout', 'toaster', '$modal', 'Constants', HomeCtrl]
     );
 
-function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster, $modal) {
+function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster, $modal, Constants) {
     /* jshint validthis: true */
     var vm = this;
 
+    vm._puherChannel = null;
     vm.tasks = [];
     vm.searchTerm = "";
 
@@ -155,9 +156,9 @@ function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster, $mod
     }
 
     function watchTasks() {
-        var client = new Pusher('629772c3ccd3b206462f');
+        var client = new Pusher(Constants.PUSHER_KEY);
         var pusher = $pusher(client);
-        var my_channel = pusher.subscribe('panteon');
+        vm._puherChannel = pusher.subscribe('panteon');
         /*TODO: rename task to worker*/
         pusher.bind('task:onprogress', taskProgress);
         pusher.bind('task:onstarted', taskStarted);
