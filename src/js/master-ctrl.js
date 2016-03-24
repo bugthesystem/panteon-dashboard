@@ -4,24 +4,23 @@
      */
 
     angular.module('PanteonApp')
-        .controller('MasterCtrl', ['$scope', '$cookieStore', '$window', MasterCtrl])
+        .controller('MasterCtrl', ['$scope', '$cookieStore', '$window', 'Constants', MasterCtrl])
     ;
 
-    function MasterCtrl($scope, $cookieStore, $window) {
+    function MasterCtrl($scope, $cookieStore, $window, Constants) {
         /* jshint validthis: true */
         var vm = this;
 
         /**
          * Sidebar Toggle & Cookie Control
          */
-        var mobileView = 992;
 
         vm.getWidth = function () {
             return window.innerWidth;
         };
 
         $scope.$watch(vm.getWidth, function (newValue, oldValue) {
-            if (newValue >= mobileView) {
+            if (newValue >= Constants.MOBILE_VIEW_WIDTH) {
                 if (angular.isDefined($cookieStore.get('toggle'))) {
                     vm.toggle = $cookieStore.get('toggle');
                 } else {
