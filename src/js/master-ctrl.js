@@ -1,43 +1,44 @@
-/**
- * Master Controller
- */
-
-angular.module('PanteonApp')
-    .controller('MasterCtrl', ['$scope', '$cookieStore', '$window', MasterCtrl])
-;
-
-function MasterCtrl($scope, $cookieStore, $window) {
-    /* jshint validthis: true */
-    var vm = this;
-
+(function () {
     /**
-     * Sidebar Toggle & Cookie Control
+     * Master Controller
      */
-    var mobileView = 992;
 
-    vm.getWidth = function () {
-        return window.innerWidth;
-    };
+    angular.module('PanteonApp')
+        .controller('MasterCtrl', ['$scope', '$cookieStore', '$window', 'Constants', MasterCtrl])
+    ;
 
-    $scope.$watch(vm.getWidth, function (newValue, oldValue) {
-        if (newValue >= mobileView) {
-            if (angular.isDefined($cookieStore.get('toggle'))) {
-                vm.toggle = !$cookieStore.get('toggle') ? false : true;
+    function MasterCtrl($scope, $cookieStore, $window, Constants) {
+        /* jshint validthis: true */
+        var vm = this;
+
+        /**
+         * Sidebar Toggle & Cookie Control
+         */
+
+        vm.getWidth = function () {
+            return window.innerWidth;
+        };
+
+        $scope.$watch(vm.getWidth, function (newValue, oldValue) {
+            if (newValue >= Constants.MOBILE_VIEW_WIDTH) {
+                if (angular.isDefined($cookieStore.get('toggle'))) {
+                    vm.toggle = $cookieStore.get('toggle');
+                } else {
+                    vm.toggle = true;
+                }
             } else {
-                vm.toggle = true;
+                vm.toggle = false;
             }
-        } else {
-            vm.toggle = false;
-        }
 
-    });
+        });
 
-    vm.toggleSidebar = function () {
-        vm.toggle = !vm.toggle;
-        $cookieStore.put('toggle', vm.toggle);
-    };
+        vm.toggleSidebar = function () {
+            vm.toggle = !vm.toggle;
+            $cookieStore.put('toggle', vm.toggle);
+        };
 
-    $window.onresize = function () {
-        $scope.$apply();
-    };
-}
+        $window.onresize = function () {
+            $scope.$apply();
+        };
+    }
+})();
