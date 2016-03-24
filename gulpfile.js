@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 
 var paths = {
     scripts: [
-        'src/js/module.js',
+        'src/js/app.js',
         'src/js/routes.js',
         'src/js/master-ctrl.js',
         'src/js/common/module.js',
@@ -29,13 +29,14 @@ var paths = {
         'src/js/home/controllers/*.js'
     ],
     styles: 'src/less/**/*.*',
+    config: ['src/config.json'],
     images: 'src/img/**/*.*',
     templates: [
         'src/js/home/views/index.html',
         'src/js/home/views/historyModal.html'
     ],
     index: 'src/index.html',
-    bower_fonts: 'src/components/**/*.{ttf,woff,eof,svg}',
+    bower_fonts: 'src/components/**/*.{ttf,woff,eof,svg}'
 };
 
 /**
@@ -45,7 +46,7 @@ gulp.task('usemin', function () {
     return gulp.src(paths.index)
         .pipe(usemin({
             js: [minifyJs(), 'concat'],
-            css: [minifyCss({keepSpecialComments: 0}), 'concat'],
+            css: [minifyCss({keepSpecialComments: 0}), 'concat']
         }))
         .pipe(gulp.dest('dist/'));
 });
@@ -66,7 +67,12 @@ gulp.task('copy-bower_fonts', function () {
 /**
  * Handle custom files
  */
-gulp.task('build-custom', ['custom-images', 'custom-js', 'custom-less', 'custom-templates']);
+gulp.task('build-custom', ['custom-images', 'custom-config', 'custom-js', 'custom-less', 'custom-templates']);
+
+gulp.task('custom-config', function () {
+    return gulp.src(paths.config)
+        .pipe(gulp.dest('dist'));
+});
 
 gulp.task('custom-images', function () {
     return gulp.src(paths.images)
@@ -99,6 +105,7 @@ gulp.task('watch', function () {
     gulp.watch([paths.images], ['custom-images']);
     gulp.watch([paths.styles], ['custom-less']);
     gulp.watch([paths.scripts], ['custom-js']);
+    gulp.watch([paths.config], ['custom-config']);
     gulp.watch([paths.templates], ['custom-templates']);
     gulp.watch([paths.index], ['usemin']);
 });

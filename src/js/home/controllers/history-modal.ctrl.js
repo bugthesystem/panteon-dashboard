@@ -1,5 +1,5 @@
 /**
- * Home Controller
+ * History Modal Controller
  */
 
 angular.module('PanteonApp.home')

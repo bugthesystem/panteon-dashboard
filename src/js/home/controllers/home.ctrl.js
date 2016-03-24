@@ -4,10 +4,11 @@
 
 angular.module('PanteonApp.home')
     .controller('HomeCtrl',
-        ['$scope', 'tasksService', 'logger', '$pusher', '$timeout', 'toaster', '$modal', 'Constants', HomeCtrl]
+        ['$scope', 'tasksService', 'logger', '$pusher', '$timeout', 'toaster', '$modal', 'Constants','_', HomeCtrl]
     );
 
-function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster, $modal, Constants) {
+function HomeCtrl($scope, tasksService, logger, $pusher, $timeout, toaster, $modal, Constants,_) {
+    
     /* jshint validthis: true */
     var vm = this;
 
